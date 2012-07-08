@@ -15,7 +15,7 @@ TabbedWindow::~TabbedWindow()
 }
 
 
-int TabbedWindow::addView(QWidget *view, QString &title)
+int TabbedWindow::addView(QWidget *view, const QString &title)
 {
     return d_ptr->addView(view, title);
 }

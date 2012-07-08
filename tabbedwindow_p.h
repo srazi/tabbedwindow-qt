@@ -9,7 +9,7 @@ class TabbedWindowPrivate
 public:
     TabbedWindowPrivate(TabbedWindow* q_ptr);
 
-    int addView(QWidget* view, QString &title);
+    int addView(QWidget* view, const QString &title);
     void removeView(int index);
 
 private:

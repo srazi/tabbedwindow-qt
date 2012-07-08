@@ -15,7 +15,7 @@ TabbedWindowPrivate::TabbedWindowPrivate(TabbedWindow* q_ptr)
 }
 
 
-int TabbedWindowPrivate::addView(QWidget *view, QString &title)
+int TabbedWindowPrivate::addView(QWidget *view, const QString &title)
 {
     return tabs->addTab(view, title);
 }
