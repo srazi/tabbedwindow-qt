@@ -11,9 +11,9 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-    qtabbedwindow.cpp \
-    qtabbedwindow_p.cpp
+    tabbedwindow.cpp \
+    tabbedwindow_p.cpp
 
 HEADERS  += \
-    qtabbedwindow.h \
-    qtabbedwindow_p.h
+    tabbedwindow.h \
+    tabbedwindow_p.h

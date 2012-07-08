@@ -1,10 +1,11 @@
 #include <QtGui>
-#include "qtabbedwindow.h"
+#include "tabbedwindow.h"
+
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QTabbedWindow w;
+    TabbedWindow w;
     w.show();
 
     QWidget v1;

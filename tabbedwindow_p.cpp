@@ -1,7 +1,7 @@
-#include "qtabbedwindow_p.h"
+#include "tabbedwindow_p.h"
 
 
-QTabbedWindowPrivate::QTabbedWindowPrivate(QTabbedWindow* q_ptr)
+TabbedWindowPrivate::TabbedWindowPrivate(TabbedWindow* q_ptr)
 {
     // Create tab widget
     tabs = new QTabWidget();
@@ -14,13 +14,13 @@ QTabbedWindowPrivate::QTabbedWindowPrivate(QTabbedWindow* q_ptr)
 }
 
 
-int QTabbedWindowPrivate::addView(QWidget *view, QString &title)
+int TabbedWindowPrivate::addView(QWidget *view, QString &title)
 {
     return tabs->addTab(view, title);
 }
 
 
-void QTabbedWindowPrivate::removeView(int index)
+void TabbedWindowPrivate::removeView(int index)
 {
     tabs->removeTab(index);
 }
