@@ -1,11 +1,11 @@
 #include "tabbedwindow_p.h"
-#include "viewtabs_p.h"
+#include "tabview_p.h"
 
 
 TabbedWindowPrivate::TabbedWindowPrivate(TabbedWindow* q_ptr)
 {
     // Create tab widget
-    tabs = new ViewTabsPrivate();
+    tabs = new TabViewPrivate();
     tabs->setTabsClosable(true);
     tabs->setDocumentMode(true);
 

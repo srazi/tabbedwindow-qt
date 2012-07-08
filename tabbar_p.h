@@ -3,11 +3,11 @@
 
 #include <QtGui>
 
-class ViewBarPrivate : public QTabBar
+class TabBarPrivate : public QTabBar
 {
     Q_OBJECT
 public:
-    ViewBarPrivate(QWidget *parent = 0);
+    TabBarPrivate(QWidget *parent = 0);
 
     void mousePressEvent(QMouseEvent *);
     void mouseMoveEvent(QMouseEvent *);

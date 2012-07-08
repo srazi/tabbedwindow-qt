@@ -1,14 +1,14 @@
 #include "QtGui"
-#include "viewbar_p.h"
+#include "tabbar_p.h"
 
 
-ViewBarPrivate::ViewBarPrivate(QWidget *parent) :
+TabBarPrivate::TabBarPrivate(QWidget *parent) :
     QTabBar(parent),
     dragging(-1)
 {
 }
 
-void ViewBarPrivate::mousePressEvent(QMouseEvent *event)
+void TabBarPrivate::mousePressEvent(QMouseEvent *event)
 {
     // If left button is pressed save current mouse position for
     // possible draggin action triggered in the future
@@ -22,7 +22,7 @@ void ViewBarPrivate::mousePressEvent(QMouseEvent *event)
 }
 
 
-void ViewBarPrivate::mouseReleaseEvent(QMouseEvent *event) {
+void TabBarPrivate::mouseReleaseEvent(QMouseEvent *event) {
     // Call superclass if a button different than the left one was released
     // and return
     if (event->button() != Qt::LeftButton) {
@@ -39,7 +39,7 @@ void ViewBarPrivate::mouseReleaseEvent(QMouseEvent *event) {
 }
 
 
-void ViewBarPrivate::mouseMoveEvent(QMouseEvent *event)
+void TabBarPrivate::mouseMoveEvent(QMouseEvent *event)
 {
     // No left button
     if (!(event->buttons() & Qt::LeftButton)) {
