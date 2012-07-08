@@ -12,8 +12,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
     tabbedwindow.cpp \
-    tabbedwindow_p.cpp
+    tabbedwindow_p.cpp \
+    viewbar_p.cpp \
+    viewtabs_p.cpp
 
 HEADERS  += \
     tabbedwindow.h \
-    tabbedwindow_p.h
+    tabbedwindow_p.h \
+    viewbar_p.h \
+    viewtabs_p.h
