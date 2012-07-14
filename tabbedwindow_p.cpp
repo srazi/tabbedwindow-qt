@@ -16,7 +16,7 @@ TabbedWindowPrivate::TabbedWindowPrivate(TabbedWindow* q_ptr)
 }
 
 
-int TabbedWindowPrivate::insertTab(QPoint pos, QWidget *page, QString text)
+int TabbedWindowPrivate::insertView(QPoint pos, QWidget *page, QString text)
 {
     // Get tab's index at the given global postition
     int index = tabs->tabAt(tabs->mapFromGlobal(pos));
