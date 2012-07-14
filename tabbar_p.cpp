@@ -5,18 +5,25 @@
 
 
 TabBarPrivate::TabBarPrivate(QWidget *parent) :
-    QTabBar(parent),
-    dragging(-1)
+    QTabBar(parent)
 {
 }
+
+
+TabBarPrivate::~TabBarPrivate()
+{
+    delete moveEvent;
+}
+
 
 void TabBarPrivate::mousePressEvent(QMouseEvent *event)
 {
     // If left button is pressed save current mouse position for
     // possible draggin action triggered in the future
     if (event->button() == Qt::LeftButton) {
-        qDebug() << "left button pressed at" << event->pos();
-        dragStartPos = event->pos();
+        qDebug() << "left button pressed at" << event->globalPos();
+        moveEvent = new TabMoveEvent(DRAG, tabAt(event->pos()),
+                                     event->globalPos());
     }
 
     // Call superclass
@@ -24,7 +31,14 @@ void TabBarPrivate::mousePressEvent(QMouseEvent *event)
 }
 
 
-void TabBarPrivate::mouseReleaseEvent(QMouseEvent *event) {
+bool TabMoveEvent::manhattan(const QPoint &pos)
+{
+    return (m_pos - pos).manhattanLength() > QApplication::startDragDistance();
+}
+
+
+void TabBarPrivate::mouseReleaseEvent(QMouseEvent *event)
+{
     // Call superclass if a button different than the left one was released
     // and return
     if (event->button() != Qt::LeftButton) {
@@ -32,43 +46,44 @@ void TabBarPrivate::mouseReleaseEvent(QMouseEvent *event) {
         return;
     }
 
-    // If left button was released and a dragging action is involved
-    // stop dragging
-    if (dragging > -1) {
+    // If left button was released and a move action is involved
+    // stop the current action
+    if (moveEvent->type() == DRAG && moveEvent->manhattan(event->globalPos()))
+    {
         // Stop dragging
-        QPoint pos = mapToGlobal(event->pos());
         TabBarPrivate *w = dynamic_cast<TabBarPrivate*>(
-                    QApplication::widgetAt(pos));
+                    QApplication::widgetAt(event->globalPos()));
 
         qDebug() << "stop dragging tab" << "on widget" << w;
 
         // Chose action by the widget under the mouse's coordinates
         if (w == NULL) {
             // Creates a new window with the dragged tab
-            createNewWindow(pos, dragging);
+            createNewWindow(event->globalPos(), moveEvent);
 
         } else {
             // Move the dragged tab into the window under the cursor
             TabbedWindow *wnd = dynamic_cast<TabbedWindow*>(w->window());
 
             if (wnd != NULL) {
-                moveToWindow(wnd, pos, dragging);
+                moveToWindow(wnd, event->globalPos(), moveEvent);
             } else {
                 qDebug() << "TabBarPrivate not inside a TabbedWindow!!!";
             }
         }
 
-        // Reset flag
-        dragging = -1;
+        // Reset move event
+        moveEvent = NULL;
     }
 }
 
 
 void TabBarPrivate::moveToWindow(TabbedWindow *wnd, const QPoint &pos,
-                                 int index)
+                                 TabMoveEvent *event)
 {
     // Remove view from this window
     TabViewPrivate *view = static_cast<TabViewPrivate*>(parent());
+    int index = event->index();
     QString text = tabText(index);
     QWidget *page = view->widget(index);
 
@@ -87,17 +102,17 @@ void TabBarPrivate::tabRemoved(int index)
 }
 
 
-void TabBarPrivate::createNewWindow(const QPoint &pos, int index)
+void TabBarPrivate::createNewWindow(const QPoint &pos,
+                                    TabMoveEvent *event)
 {
-    // Retrieve references
-    TabViewPrivate *view = static_cast<TabViewPrivate*>(parent());
-
     // Create the new window with the same size and positioned under the cursor
     TabbedWindow *wnd = new TabbedWindow();
     wnd->resize(window()->size());
     wnd->move(pos);
 
     // Move widget to the new window
+    TabViewPrivate *view = static_cast<TabViewPrivate*>(parent());
+    int index = event->index();
     QWidget *tab = view->widget(index);
     QString text = view->tabText(index);
 
@@ -109,29 +124,37 @@ void TabBarPrivate::createNewWindow(const QPoint &pos, int index)
 }
 
 
+TabMoveEvent::TabMoveEvent(MovementTypeEnum type, int index, QPoint pos)
+{
+    m_type = type;
+    m_index = index;
+    m_pos = pos;
+}
+
+
 void TabBarPrivate::mouseMoveEvent(QMouseEvent *event)
 {
-    // No left button
-    if (!(event->buttons() & Qt::LeftButton)) {
-        qDebug() << "no left button";
-        return;
-    }
+//    // No left button
+//    if (!(event->buttons() & Qt::LeftButton)) {
+//        qDebug() << "no left button";
+//        return;
+//    }
 
-    // We are already dragging
-    if (dragging > -1) {
-        return;
-    }
+//    // We are already dragging
+//    if (dragging > -1) {
+//        return;
+//    }
 
-    // No far enough
-    if ((event->pos() - dragStartPos).manhattanLength()
-            < QApplication::startDragDistance()) {
-        qDebug() << "no far enough"
-                 << ((event->pos() - dragStartPos).manhattanLength())
-                 << QApplication::startDragDistance();
-        return;
-    }
+//    // No far enough
+//    if ((event->pos() - dragStartPos).manhattanLength()
+//            < QApplication::startDragDistance()) {
+//        qDebug() << "no far enough"
+//                 << ((event->pos() - dragStartPos).manhattanLength())
+//                 << QApplication::startDragDistance();
+//        return;
+//    }
 
-    // Start dragging
-    qDebug() << "start dragging tab" << tabAt(event->pos());
-    dragging = tabAt(event->pos());
+//    // Start dragging
+//    qDebug() << "start dragging tab" << tabAt(event->pos());
+//    dragging = tabAt(event->pos());
 }
