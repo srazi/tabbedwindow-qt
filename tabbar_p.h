@@ -16,8 +16,8 @@ public:
     void mouseReleaseEvent(QMouseEvent *);
 
 protected:
-    void createNewWindow(QPoint pos, int index);
-    void moveToWindow(TabbedWindow *wnd, QPoint pos, int index);
+    void createNewWindow(const QPoint &pos, int index);
+    void moveToWindow(TabbedWindow *wnd, const QPoint &pos, int index);
     void tabRemoved(int index);
     
 signals:

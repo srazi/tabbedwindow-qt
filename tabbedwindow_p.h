@@ -13,7 +13,7 @@ public:
     TabbedWindowPrivate(TabbedWindow* q_ptr);
 
     int addView(QWidget* view, const QString &title);
-    int insertView(QPoint pos, QWidget *page, QString text);
+    int insertView(const QPoint &pos, QWidget *page, const QString &text);
     void removeView(int index);
 
 private:

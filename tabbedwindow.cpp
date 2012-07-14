@@ -15,7 +15,8 @@ TabbedWindow::~TabbedWindow()
 }
 
 
-int TabbedWindow::insertTab(QPoint pos, QWidget *page, QString text)
+int TabbedWindow::insertTab(const QPoint &pos, QWidget *page,
+                            const QString &text)
 {
     return d_ptr->insertView(pos, page, text);
 }

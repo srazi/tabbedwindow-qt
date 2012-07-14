@@ -64,7 +64,8 @@ void TabBarPrivate::mouseReleaseEvent(QMouseEvent *event) {
 }
 
 
-void TabBarPrivate::moveToWindow(TabbedWindow *wnd, QPoint pos, int index)
+void TabBarPrivate::moveToWindow(TabbedWindow *wnd, const QPoint &pos,
+                                 int index)
 {
     // Remove view from this window
     TabViewPrivate *view = static_cast<TabViewPrivate*>(parent());
@@ -86,7 +87,7 @@ void TabBarPrivate::tabRemoved(int index)
 }
 
 
-void TabBarPrivate::createNewWindow(QPoint pos, int index)
+void TabBarPrivate::createNewWindow(const QPoint &pos, int index)
 {
     // Retrieve references
     TabViewPrivate *view = static_cast<TabViewPrivate*>(parent());

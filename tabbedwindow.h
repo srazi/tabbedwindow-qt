@@ -16,7 +16,7 @@ public:
     ~TabbedWindow();
 
     int addView(QWidget* view, const QString &title);
-    int insertTab(QPoint pos, QWidget *page, QString text);
+    int insertTab(const QPoint &pos, QWidget *page, const QString &text);
     void removeView(int index);
 
 private:
