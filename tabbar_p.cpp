@@ -21,8 +21,16 @@ void TabBarPrivate::mousePressEvent(QMouseEvent *event)
 {
     // If left button is pressed save current mouse position for
     // possible draggin action triggered in the future
+    MovementTypeEnum type;
+
     if (event->button() == Qt::LeftButton) {
-        moveEvent = new TabMoveEvent(DRAG, tabAt(event->pos()),
+        if (count() > 1) {
+            type = DRAG;
+        } else {
+            type = MOVE;
+        }
+
+        moveEvent = new TabMoveEvent(type, tabAt(event->pos()),
                                      event->globalPos());
     }
 
@@ -136,27 +144,15 @@ TabMoveEvent::TabMoveEvent(MovementTypeEnum type, int index, QPoint pos)
 
 void TabBarPrivate::mouseMoveEvent(QMouseEvent *event)
 {
-//    // No left button
-//    if (!(event->buttons() & Qt::LeftButton)) {
-//        qDebug() << "no left button";
-//        return;
-//    }
+    // No left button or no move event
+    if (!(event->buttons() & Qt::LeftButton)
+            or moveEvent == NULL
+            or moveEvent->type() != MOVE) {
+        return;
+    }
 
-//    // We are already dragging
-//    if (dragging > -1) {
-//        return;
-//    }
-
-//    // No far enough
-//    if ((event->pos() - dragStartPos).manhattanLength()
-//            < QApplication::startDragDistance()) {
-//        qDebug() << "no far enough"
-//                 << ((event->pos() - dragStartPos).manhattanLength())
-//                 << QApplication::startDragDistance();
-//        return;
-//    }
-
-//    // Start dragging
-//    qDebug() << "start dragging tab" << tabAt(event->pos());
-//    dragging = tabAt(event->pos());
+    // Move the window by the delta between the current mouse position and the
+    // last one
+    window()->move(window()->pos() + event->globalPos() - moveEvent->pos());
+    moveEvent->setPos(event->globalPos());
 }

@@ -19,6 +19,7 @@ public:
     const MovementTypeEnum type() { return m_type; }
     const int index() { return m_index; }
     const QPoint pos() { return m_pos; }
+    void setPos(QPoint pos) { m_pos = pos; }
     bool manhattan(const QPoint &pos);
 
 private:
