@@ -3,6 +3,7 @@
 
 #include "tabbar_p.h"
 #include "tabview_p.h"
+#include "tabmoveevent.h"
 
 
 TabBarPrivate::TabBarPrivate(QWidget *parent) :
@@ -21,15 +22,15 @@ void TabBarPrivate::mousePressEvent(QMouseEvent *event)
 {
     // If left button is pressed save current mouse position for
     // possible draggin action triggered in the future
-    MovementTypeEnum type;
+    TabMoveEvent::MovementType type;
     QPoint pos;
 
     if (event->button() == Qt::LeftButton) {
         if (count() > 1) {
-            type = DRAG;
+            type = TabMoveEvent::Dragging;
             pos = event->globalPos();
         } else {
-            type = MOVE;
+            type = TabMoveEvent::Moving;
             pos = event->globalPos() - window()->pos();
         }
 
@@ -38,12 +39,6 @@ void TabBarPrivate::mousePressEvent(QMouseEvent *event)
 
     // Call superclass
     QTabBar::mousePressEvent(event);
-}
-
-
-bool TabMoveEvent::manhattan(const QPoint &pos)
-{
-    return (m_pos - pos).manhattanLength() > QApplication::startDragDistance();
 }
 
 
@@ -58,7 +53,8 @@ void TabBarPrivate::mouseReleaseEvent(QMouseEvent *event)
 
     // If left button was released and a move action is involved
     // process the current action
-    if (moveEvent->type() == DRAG && moveEvent->manhattan(event->globalPos()))
+    if (moveEvent->type() == TabMoveEvent::Dragging
+            && moveEvent->manhattan(event->globalPos()))
     {
         // Stop dragging
         TabBarPrivate *w = dynamic_cast<TabBarPrivate*>(
@@ -136,20 +132,12 @@ void TabBarPrivate::createNewWindow(const QPoint &pos,
 }
 
 
-TabMoveEvent::TabMoveEvent(MovementTypeEnum type, int index, QPoint pos)
-{
-    m_type = type;
-    m_index = index;
-    m_pos = pos;
-}
-
-
 void TabBarPrivate::mouseMoveEvent(QMouseEvent *event)
 {
     // No left button or no move event
     if (!(event->buttons() & Qt::LeftButton)
             or moveEvent == NULL
-            or moveEvent->type() != MOVE) {
+            or moveEvent->type() != TabMoveEvent::Moving) {
         return;
     }
 

@@ -14,10 +14,12 @@ SOURCES += main.cpp\
     tabbedwindow.cpp \
     tabbedwindow_p.cpp \
     tabbar_p.cpp \
-    tabview_p.cpp
+    tabview_p.cpp \
+    tabmoveevent.cpp
 
 HEADERS  += \
     tabbedwindow.h \
     tabbedwindow_p.h \
     tabbar_p.h \
-    tabview_p.h
+    tabview_p.h \
+    tabmoveevent.h
