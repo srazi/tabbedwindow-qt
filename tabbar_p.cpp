@@ -22,7 +22,7 @@ void TabBarPrivate::mousePressEvent(QMouseEvent *event)
 {
     // If left button is pressed start tab move event
     if (event->button() == Qt::LeftButton) {
-        QPoint offset = window()->pos() - event->globalPos();
+        QPoint offset = event->globalPos() - window()->pos();
 
         moveEvent = new TabMoveEvent(offset, tabAt(event->pos()));
     }
@@ -102,15 +102,13 @@ void TabBarPrivate::tabRemoved(int index)
 }
 
 
-void TabBarPrivate::createNewWindow(const QPoint &pos,
-                                    TabMoveEvent *event)
+void TabBarPrivate::createNewWindow(const QPoint &pos, TabMoveEvent *event)
 {
     // Create the new window with the same size and centered under the cursor
     TabbedWindow *wnd = new TabbedWindow();
-    QRect geometry = window()->geometry();
 
-    geometry.moveCenter(pos);
-    wnd->setGeometry(geometry);
+    wnd->resize(window()->size());
+    wnd->move(pos - event->pos());
 
     // Move widget to the new window
     TabViewPrivate *view = static_cast<TabViewPrivate*>(parent());
