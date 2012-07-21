@@ -5,6 +5,7 @@
 TabView::TabView(QWidget *parent) :
     QTabWidget(parent)
 {
+    // Set custom tabbar
     setTabBar(new TabBar);
 }
 
