@@ -1,8 +1,9 @@
-#include <QApplication>
-#include <QToolBar>
-#include <QMenuBar>
-
 #include "tabbedwindow.h"
+#include <QApplication>
+#include <QMainWindow>
+#include <QToolBar>
+#include <QAction>
+#include <QMenuBar>
 
 
 int main(int argc, char *argv[])
