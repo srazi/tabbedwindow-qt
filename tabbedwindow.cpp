@@ -84,7 +84,6 @@ TabbedWindowPrivate::TabbedWindowPrivate(TabbedWindow* q_ptr)
 {
     // Create tab widget
     tabs = new TabView();
-    tabs->setTabsClosable(true);
     tabs->setDocumentMode(true);
 
     // Set up main window
