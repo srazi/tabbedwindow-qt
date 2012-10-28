@@ -61,7 +61,7 @@ void TabbedWindow::setCurrentView(int index)
 }
 
 
-int TabbedWindow::insertTab(const QPoint &pos, QWidget *page,
+int TabbedWindow::insertView(const QPoint &pos, QWidget *page,
                             const QString &text)
 {
     return d_ptr->insertView(pos, page, text);
