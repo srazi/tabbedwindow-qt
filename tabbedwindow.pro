@@ -12,7 +12,7 @@ TARGET = tabbedwindow
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
+SOURCES += demo.cpp\
     tabbedwindow.cpp \
     tabbar.cpp \
     tabview.cpp \
