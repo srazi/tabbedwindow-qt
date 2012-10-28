@@ -32,7 +32,9 @@
 #include <QAction>
 #include <QMenuBar>
 
-
+/*
+ * Demo application to show the tabbedwindow behaviour
+ */
 int main(int argc, char *argv[])
 {
     // Create application
