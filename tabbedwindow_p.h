@@ -35,6 +35,8 @@ class TabView;
 
 /*
  * Private implementation of the TabbedWindow class (PIMPL pattern)
+ *
+ *See tabbedwindow.h for more documentation
  */
 class TabbedWindowPrivate : public QObject
 {
