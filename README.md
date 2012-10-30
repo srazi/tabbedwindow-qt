@@ -8,7 +8,7 @@ dragged tab and tabs  can be moved between different windwos as well.
 This code is a proof of concept of how that behaviour can be implemented in Qt
 so the code itself is not perfect nor feature rich.
 
-However I think this is a good starting poit for a more complete widget or
+However I think this is a good starting point for a more complete widget or
 framework.
 
 ## Features
