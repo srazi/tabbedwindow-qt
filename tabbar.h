@@ -39,7 +39,7 @@ class TabbedWindow;
 /*
  * Re-implemented the standard QTabBar widget but adds new methods to allow
  * Drag&Drop operations outside the tab bar's window, like creating a new
- * window with a dragged view, mote a view into a different window or close the
+ * window with a dragged view, move a view into a different window or close the
  * current window if no more tabs are available
  */
 class TabBar : public QTabBar
@@ -50,7 +50,7 @@ public:
     TabBar(QWidget *parent = 0);
     ~TabBar();
 
-    // If the left mouse boutton if pressed over a tab show the ghost window
+    // If the left mouse button if pressed over a tab show the ghost window
     // and starts the Drag&Drop operation
     void mousePressEvent(QMouseEvent *);
 
