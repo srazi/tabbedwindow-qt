@@ -38,8 +38,8 @@ class TabBar;
  * It will be created during the Drag&Drop action as a visual feedback for the
  * user.
  *
- * When moving this widget on the scrren use moveWithOffest() instead of move()
- * so the mouse cursor will maintain the corrent offset from the upper left
+ * When moving this widget on the screen use moveWithOffest() instead of move()
+ * so the mouse cursor will maintain the current offset from the upper left
  * corner of the window as when the D&D operation has started.
  */
 class GhostWindow : public QWidget
