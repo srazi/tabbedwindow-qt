@@ -1,4 +1,4 @@
-## Tabbed Windwos implementation in Qt
+## Tabbed Windows implementation in Qt
 This is a implementation of the same tabs Drag&Drop behaviour that you can find
 in Firefox or Google Chrome browsers.
 
