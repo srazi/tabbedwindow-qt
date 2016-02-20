@@ -11,6 +11,8 @@ so the code itself is not perfect nor feature rich.
 However I think this is a good starting point for a more complete widget or
 framework.
 
+[![demo](http://img.youtube.com/vi/wjV0_3VXtfc/0.jpg)](http://www.youtube.com/watch?v=wjV0_3VXtfc)
+
 ## Features
 * Add, insert, move and remove views from the tab bar
 * Dragging a tab outside the window will creates a new window with the dragged
